@@ -1,27 +1,14 @@
-# JsonWidgetsMicroFrontend
+# Json Widgets Micro-Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.8.
+Inputs
 
-## Development server
+jsonInput | Mandatory | The main JSON should be given as input here either as JSON String or JavaScript Object
+variables | Optional | This should be a JS Object containing the variables required either for the GraphQL Variables or to be referenced in the widgets
+baseURL | Optional | For all the requests, this baseURL will be appended before the url in the requests
+tokens| Optional | This should be a JS Object containing the variables required to be referenced for the authToken in the requests
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+jsonInput Structure
 
-## Code scaffolding
+The jsonInput Structure consists of 2 parts: the requests part and the widgets display configuration part
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Requests
