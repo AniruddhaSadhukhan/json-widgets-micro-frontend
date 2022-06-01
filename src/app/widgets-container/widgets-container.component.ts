@@ -1,17 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  isPlainObject,
-  cloneDeep,
-  isEmpty,
-  uniqueId,
-  isArray,
-  upperCase,
-  includes,
-  isString,
-  get,
-  set,
-} from 'lodash-es';
 import { eachDeep } from 'deepdash-es/standalone';
+import {
+  cloneDeep,
+  get,
+  includes,
+  isArray,
+  isEmpty,
+  isPlainObject,
+  isString,
+  set,
+  uniqueId,
+  upperCase,
+} from 'lodash-es';
 import { ReportService } from '../report.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class WidgetsContainerComponent implements OnInit {
   @Input() baseURL = '';
   @Input() tokens: any = {};
 
-  report: any;
+  input: any;
   widgetRoot;
   jsonResponse: any = [];
   isRequestObject = false;
@@ -46,26 +46,26 @@ export class WidgetsContainerComponent implements OnInit {
 
   refresh() {
     if (isPlainObject(this.jsonInput)) {
-      this.report = cloneDeep(this.jsonInput);
+      this.input = cloneDeep(this.jsonInput);
     } else {
-      this.report = JSON.parse(this.jsonInput);
+      this.input = JSON.parse(this.jsonInput);
     }
 
     this.variables = cloneDeep(this.variables);
 
-    if (isEmpty(this.report.request)) {
+    if (isEmpty(this.input.request)) {
       this.startDrawing();
       return;
     }
 
-    if (!isArray(this.report.request)) {
+    if (!isArray(this.input.request)) {
       this.isRequestObject = true;
-      this.report.request = [this.report.request];
+      this.input.request = [this.input.request];
     }
-    this.jsonResponse = this.report.request.map((_) => []);
+    this.jsonResponse = this.input.request.map((_) => []);
 
     //Loop through all requests
-    this.report.request.forEach((req, index) => {
+    this.input.request.forEach((req, index) => {
       this.handleRequests(req, index);
     });
   }
@@ -102,7 +102,7 @@ export class WidgetsContainerComponent implements OnInit {
     } else {
       this.jsonResponse[index] = res;
     }
-    if (index === this.report.request.length - 1) {
+    if (index === this.input.request.length - 1) {
       console.log(this.jsonResponse);
       this.startDrawing();
     }
@@ -143,7 +143,7 @@ export class WidgetsContainerComponent implements OnInit {
     const root = document.getElementById(this.widgetRoot);
     if (root) {
       root.innerHTML = '';
-      this.draw(this.report, root);
+      this.draw(this.input, root);
     }
   };
 
@@ -161,11 +161,11 @@ export class WidgetsContainerComponent implements OnInit {
     element[rowOrColumn].forEach((subElement) => {
       const child = document.createElement('div');
       rowOrColumn === 'rows'
-        ? child.classList.add('widget-row')
-        : child.classList.add('widget-col');
+        ? child.classList.add('row')
+        : child.classList.add('col');
 
       if (subElement.hasOwnProperty('classes') && subElement.classes.length) {
-        child.classList.add(...subElement.classes.map((c) => `widget-${c}`));
+        child.classList.add(...subElement.classes);
       }
 
       this.draw(subElement, child);
@@ -235,7 +235,7 @@ export class WidgetsContainerComponent implements OnInit {
 
     const div = document.createElement('div');
     if (element.hasOwnProperty('classes') && element.classes.length) {
-      div.classList.add(...element.classes.map((c) => `widget-${c}`));
+      div.classList.add(...element.classes);
     }
     console.log(element);
     div.style.padding = '10px';
