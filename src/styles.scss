@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 html,
 body {
@@ -16,7 +17,7 @@ body {
 }
 
 .dynamic-widget-container{
-  @import "~bootstrap/dist/css/bootstrap-grid";
+  @import "bootstrap/dist/css/bootstrap-grid";
 
   .widget-tooltip{
     white-space: pre-wrap;

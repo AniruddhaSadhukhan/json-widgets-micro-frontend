@@ -15,9 +15,11 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "noImplicitAny": false,
-    "target": "es2017",
-    "module": "es2020",
-    "lib": ["es2018", "dom"]
+    "strictPropertyInitialization": false,
+    "strictNullChecks": false,
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
