@@ -1,0 +1,74 @@
+<mat-card
+  class="mat-typography fullHeight widgetCard"
+  fxLayout="column"
+  fxFlexFill
+>
+  <div *ngIf="chartData.title">
+    <div class="mat-title" *ngIf="chartData.title">
+      <strong>{{ chartData.title }}</strong>
+
+      <div class="mat-subheading-1 subtitle" *ngIf="chartData.subtitle">
+        {{ chartData.subtitle }}
+      </div>
+    </div>
+
+    <div fxFlex></div>
+
+    <mat-icon
+      *ngIf="chartData.url"
+      matTooltip="Open details in new tab"
+      class="widget-url"
+      (click)="openURL()"
+    >
+      open_in_new
+    </mat-icon>
+
+    <mat-icon
+      *ngIf="chartData.info"
+      ngxTippy
+      [tippyProps]="{
+        content: chartData.info,
+        allowHTML: true,
+        placement: 'auto'
+      }"
+      tippyClassName="widget-tooltip"
+      class="info"
+    >
+      info_outline
+    </mat-icon>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="start" *ngIf="chartData.stat">
+    <div class="mat-display-3 statValue" *ngIf="showFullValue">
+      {{ chartData.stat.value }}
+    </div>
+    <div class="mat-display-3 statValue" *ngIf="!showFullValue">
+      {{ chartData.stat.unitLessValue }}
+    </div>
+    <div class="mat-title statValue statUnit" *ngIf="!showFullValue">
+      {{ chartData.stat.unit }}
+    </div>
+  </div>
+
+  <div class="chart-container" fxFlex [ngStyle]="chartStyle">
+    <canvas
+      baseChart
+      #lineChartCanvas
+      [datasets]="lineChartDatasets"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [legend]="false"
+      type="line"
+      [plugins]="lineChartPlugins"
+    ></canvas>
+  </div>
+
+  <div
+    class="unavailableDataDiv"
+    fxFlex
+    *ngIf="dataAbsent"
+    fxLayoutAlign="center center"
+  >
+    {{ chartData.dataAbsentText || "Historical data unavailable" }}
+  </div>
+</mat-card>

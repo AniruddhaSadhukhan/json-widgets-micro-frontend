@@ -1,0 +1,30 @@
+.widgetCard {
+  background-color: #223c76;
+  color: whitesmoke;
+}
+
+.info {
+  cursor: help;
+}
+
+.subtitle {
+  color: #e0e0e0b0;
+  margin-bottom: 0;
+}
+
+.statValue{
+    margin-left: 10px;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.statUnit{
+    color: #e0e0e0b0;
+}
+
+.unavailableDataDiv{
+    color: #e0e0e0b0;
+    font-style: italic;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}

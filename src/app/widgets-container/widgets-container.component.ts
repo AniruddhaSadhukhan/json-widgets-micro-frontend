@@ -1,4 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  Renderer2,
+} from '@angular/core';
 import { eachDeep } from 'deepdash-es/standalone';
 import {
   cloneDeep,
@@ -25,12 +33,18 @@ export class WidgetsContainerComponent implements OnInit {
   @Input() baseURL = '';
   @Input() tokens: any = {};
 
+  @Output() widgetOutput: EventEmitter<any> = new EventEmitter();
+
   input: any;
   widgetRoot;
   jsonResponse: any = [];
   isRequestObject = false;
 
-  constructor(private service: ReportService) {
+  constructor(
+    private service: ReportService,
+    private renderer: Renderer2,
+    private elRef: ElementRef
+  ) {
     this.widgetRoot = uniqueId('widgetRoot_');
   }
 
@@ -140,9 +154,9 @@ export class WidgetsContainerComponent implements OnInit {
   };
 
   startDrawing = () => {
-    const root = document.getElementById(this.widgetRoot);
+    const root = this.elRef.nativeElement.querySelector('#' + this.widgetRoot);
     if (root) {
-      root.innerHTML = '';
+      this.renderer.setProperty(root, 'innerHTML', '');
       this.draw(this.input, root);
     }
   };
@@ -159,18 +173,18 @@ export class WidgetsContainerComponent implements OnInit {
 
   drawRowsOrColumns = (element, parent, rowOrColumn) => {
     element[rowOrColumn].forEach((subElement) => {
-      const child = document.createElement('div');
+      const child = this.renderer.createElement('div');
       rowOrColumn === 'rows'
-        ? child.classList.add('row')
-        : child.classList.add('col');
+        ? this.renderer.addClass(child, 'row')
+        : this.renderer.addClass(child, 'col');
 
       if (subElement.hasOwnProperty('classes') && subElement.classes.length) {
-        child.classList.add(...subElement.classes);
+        subElement.classes.forEach((c) => this.renderer.addClass(child, c));
       }
 
       this.draw(subElement, child);
 
-      parent.appendChild(child);
+      this.renderer.appendChild(parent, child);
     });
   };
 
@@ -216,11 +230,16 @@ export class WidgetsContainerComponent implements OnInit {
     });
 
     if (isChanged) {
-      const res = Function(`"use strict";return ${value}`)();
-      if (typeof res !== 'function') {
-        value = res;
-      } else {
-        value = res();
+      try {
+        const res = Function(`"use strict";return ${value}`)();
+        if (typeof res !== 'function') {
+          value = res;
+        } else {
+          value = res();
+        }
+      } catch (e) {
+        console.debug(e);
+        value = '';
       }
     }
 
@@ -228,18 +247,22 @@ export class WidgetsContainerComponent implements OnInit {
   };
 
   drawWidget = (element, parent) => {
-    const widget: any = document.createElement(`${element.widget}-widget`);
+    const widget = this.renderer.createElement(`${element.widget}-widget`);
 
     this.evalResponse(element);
-    widget.chartData = element;
 
-    const div = document.createElement('div');
+    this.renderer.setProperty(widget, 'chartData', element);
+    this.renderer.listen(widget, 'widgetOutput', (e) => {
+      this.widgetOutput.emit(e.detail);
+    });
+
+    const div = this.renderer.createElement('div');
     if (element.hasOwnProperty('classes') && element.classes.length) {
-      div.classList.add(...element.classes);
+      element.classes.forEach((c) => this.renderer.addClass(div, c));
     }
-    console.log(element);
-    div.style.padding = '10px';
-    div.appendChild(widget);
-    parent.appendChild(div);
+
+    this.renderer.setStyle(div, 'padding', '10px');
+    this.renderer.appendChild(div, widget);
+    this.renderer.appendChild(parent, div);
   };
 }
