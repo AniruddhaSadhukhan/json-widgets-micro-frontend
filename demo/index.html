@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Widget MF Demo</title>
-    <link rel="stylesheet" href="http://localhost:4251/json-widgets-micro-frontend/styles.css">
+    <link rel="stylesheet" href="index.css">
+    <link
+      rel="stylesheet"
+      href="http://localhost:4251/json-widgets-micro-frontend/styles.css"
+    />
     <script src="http://localhost:4251/json-widgets-micro-frontend/polyfills.js"></script>
     <script src="http://localhost:4251/json-widgets-micro-frontend/main.js"></script>
-</head>
-<body>
-    DEMO
+  </head>
+  <body>
+    <h1>JSON to Widgets Micro Frontend Demo <a href="https://github.com/AniruddhaSadhukhan/json-widgets-micro-frontend">[GitHub]</a> </h1>
+    <details>
+      <summary>Click here to see JSON used to render the widget below</summary>
+      <pre id="jsonDisplay"></pre>
+    </details>
     <json-widgets id="widgetContainer"></json-widgets>
     <script src="index.js"></script>
-</body>
+  </body>
 </html>
