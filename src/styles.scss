@@ -18,6 +18,7 @@ body {
 
 .dynamic-widget-container{
   @import "bootstrap/dist/css/bootstrap-grid";
+  @import "bootstrap/dist/css/bootstrap-utilities";
 
   .widget-tooltip{
     white-space: pre-wrap;

@@ -1,9 +1,7 @@
 <mat-card
-  class="mat-typography fullHeight widgetCard"
-  fxLayout="column"
-  fxFlexFill
+  class="d-flex mat-typography fullHeight widgetCard flex-column h-100 w-100"
 >
-  <div *ngIf="chartData.title">
+  <div *ngIf="chartData.title" class="d-flex">
     <div class="mat-title widget-title" *ngIf="chartData.title">
       <strong>{{ chartData.title }}</strong>
 
@@ -12,7 +10,7 @@
       </div>
     </div>
 
-    <div fxFlex></div>
+    <div class="d-flex flex-fill"></div>
 
     <mat-icon
       *ngIf="chartData.url"
@@ -38,7 +36,7 @@
     </mat-icon>
   </div>
 
-  <div fxLayout="column" fxLayoutAlign="start" *ngIf="chartData.stat">
+  <div class="d-flex flex-column justify-content-start" *ngIf="chartData.stat">
     <div class="mat-display-3 statValue" *ngIf="showFullValue">
       {{ chartData.stat.value }}
     </div>
@@ -50,7 +48,7 @@
     </div>
   </div>
 
-  <div class="chart-container" fxFlex [ngStyle]="chartStyle">
+  <div class="chart-container" class="flex-fill" [ngStyle]="chartStyle">
     <canvas
       baseChart
       #lineChartCanvas
@@ -64,10 +62,8 @@
   </div>
 
   <div
-    class="unavailableDataDiv"
-    fxFlex
+    class="unavailableDataDiv flex-fill d-flex justify-content-center align-items-center"
     *ngIf="dataAbsent"
-    fxLayoutAlign="center center"
   >
     {{ chartData.dataAbsentText || "Historical data unavailable" }}
   </div>

@@ -223,12 +223,6 @@ widgetContainer.jsonInput = {
                   unit: "month",
                   tooltipFormat: "MMMM y",
                 },
-                ticks: {
-                  callback: {
-                    arguments: "value",
-                    body: "return value.charAt(0);",
-                  },
-                },
               },
             },
           },
@@ -261,12 +255,6 @@ widgetContainer.jsonInput = {
                 time: {
                   unit: "month",
                   tooltipFormat: "MMMM y",
-                },
-                ticks: {
-                  callback: {
-                    arguments: "value",
-                    body: "return value.charAt(0);",
-                  },
                 },
               },
             },
