@@ -14,8 +14,6 @@ export class ReportService {
       headers = headers.set(
         'Authorization',
         req.authToken.replace(/\${{([A-Za-z0-9_\-\.\[\]]*)}}/g, (_, p) => {
-          console.log(p, tokens);
-
           return get(tokens, p, p);
         })
       );
