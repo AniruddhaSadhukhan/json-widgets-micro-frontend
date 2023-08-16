@@ -193,8 +193,8 @@ widgetContainer.jsonInput = {
             },
           ],
           chartStyle: {
-            "height.px": 250
-          }
+            "height.px": 250,
+          },
         },
         {
           widget: "stat-graph-card",
@@ -259,6 +259,57 @@ widgetContainer.jsonInput = {
               },
             },
           },
+        },
+      ],
+    },
+    {
+      classes: ["justify-content-center"],
+      widgets: [
+        {
+          widget: "small-stat",
+          classes: ["col-md-6", "col-lg-3"],
+          title: "User Count",
+          value: "3.07",
+          unit: "Million",
+          showSeparateUnit: true,
+          displayAsIndividualCard: false,
+          icon: "groups",
+        },
+        {
+          widget: "small-stat",
+          classes: ["col-md-6", "col-lg-3"],
+          title: "User Count",
+          subtitle: "(normal view)",
+          value: "3.07 Million",
+          showSeparateUnit: true,
+          trend: "up",
+          info: "abc",
+          icon: "groups",
+        },
+        {
+          widget: "small-stat",
+          classes: ["col-md-6", "col-lg-3"],
+          title: "User Count",
+          subtitle: "(card view)",
+          value: "3.07 Million",
+          showSeparateUnit: true,
+          displayAsIndividualCard: true,
+          trend: "up",
+          info: "abc",
+          icon: "groups",
+        },
+        {
+          widget: "small-stat",
+          classes: ["col-md-6", "col-lg-3"],
+          title: "User Count",
+          subtitle: "(Dynamic from HTTP req)",
+          value: "${{0.sampleResponse1.data.users.total}} + ' Million'",
+          showSeparateUnit: true,
+          displayAsIndividualCard: true,
+          trend:
+            "() => {\n  let historicalData = ${{0.sampleResponse1.data.users.historicalData}};\n  if (historicalData?.length > 2) {\n    historicalData = historicalData\n      .sort((a, b) => {\n        return (\n          new Date(a.time.year, a.time.month - 1) -\n          new Date(b.time.year, b.time.month - 1)\n        );\n      })\n      .slice(-2);\n    let oldValue = historicalData[0].value;\n    let newValue = historicalData[1].value;\n    return newValue > oldValue ? 'up' : newValue < oldValue ? 'down' : 'flat';\n  } else {\n    return '';\n  }\n};\n",
+          info: "abc",
+          icon: "groups",
         },
       ],
     },

@@ -1,11 +1,12 @@
 <mat-card
+  appearance="outlined"
   class="d-flex mat-typography fullHeight widgetCard flex-column h-100 w-100"
 >
-  <div *ngIf="chartData.title" class="d-flex">
-    <div class="mat-title widget-title" *ngIf="chartData.title">
+  <mat-card-header *ngIf="chartData.title" class="d-flex">
+    <div class="mat-headline-6 widget-title" *ngIf="chartData.title">
       <strong>{{ chartData.title }}</strong>
 
-      <div class="mat-subheading-1 subtitle" *ngIf="chartData.subtitle">
+      <div class="mat-body-1 subtitle" *ngIf="chartData.subtitle">
         {{ chartData.subtitle }}
       </div>
     </div>
@@ -34,37 +35,42 @@
     >
       info_outline
     </mat-icon>
-  </div>
+  </mat-card-header>
 
-  <div class="d-flex flex-column justify-content-start" *ngIf="chartData.stat">
-    <div class="mat-display-3 statValue" *ngIf="showFullValue">
-      {{ chartData.stat.value }}
+  <mat-card-content class="d-flex flex-fill flex-column">
+    <div
+      class="d-flex flex-column justify-content-start"
+      *ngIf="chartData.stat"
+    >
+      <div class="mat-headline-2 statValue" *ngIf="showFullValue">
+        {{ chartData.stat.value }}
+      </div>
+      <div class="mat-headline-2 statValue" *ngIf="!showFullValue">
+        {{ chartData.stat.unitLessValue }}
+      </div>
+      <div class="mat-headline-6 statValue statUnit" *ngIf="!showFullValue">
+        {{ chartData.stat.unit }}
+      </div>
     </div>
-    <div class="mat-display-3 statValue" *ngIf="!showFullValue">
-      {{ chartData.stat.unitLessValue }}
-    </div>
-    <div class="mat-title statValue statUnit" *ngIf="!showFullValue">
-      {{ chartData.stat.unit }}
-    </div>
-  </div>
 
-  <div class="chart-container" class="flex-fill" [ngStyle]="chartStyle">
-    <canvas
-      baseChart
-      #lineChartCanvas
-      [datasets]="lineChartDatasets"
-      [labels]="lineChartLabels"
-      [options]="lineChartOptions"
-      [legend]="false"
-      type="line"
-      [plugins]="lineChartPlugins"
-    ></canvas>
-  </div>
+    <div class="chart-container" class="flex-fill" [ngStyle]="chartStyle">
+      <canvas
+        baseChart
+        #lineChartCanvas
+        [datasets]="lineChartDatasets"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [legend]="false"
+        type="line"
+        [plugins]="lineChartPlugins"
+      ></canvas>
+    </div>
 
-  <div
-    class="unavailableDataDiv flex-fill d-flex justify-content-center align-items-center"
-    *ngIf="dataAbsent"
-  >
-    {{ chartData.dataAbsentText || "Historical data unavailable" }}
-  </div>
+    <div
+      class="unavailableDataDiv flex-fill d-flex justify-content-center align-items-center"
+      *ngIf="dataAbsent"
+    >
+      {{ chartData.dataAbsentText || "Historical data unavailable" }}
+    </div>
+  </mat-card-content>
 </mat-card>

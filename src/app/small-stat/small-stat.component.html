@@ -1,2 +1,57 @@
-<p>small-stat works!</p>
-{{ chartData | json }}
+<div class="d-flex align-items-center justify-content-center h-100">
+  <div *ngIf="!chartData.displayAsIndividualCard">
+    <ng-container [ngTemplateOutlet]="smallStatTemplate"></ng-container>
+  </div>
+  <mat-card *ngIf="chartData.displayAsIndividualCard">
+    <mat-card-content>
+      <ng-container [ngTemplateOutlet]="smallStatTemplate"></ng-container>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #smallStatTemplate>
+  <div class="d-flex">
+    <div
+      class="icon d-flex align-items-center ps-2 pe-3 opacity-75"
+      *ngIf="chartData.icon"
+    >
+      <mat-icon class="">{{ chartData.icon }}</mat-icon>
+    </div>
+    <div>
+      <div class="stat d-flex">
+        <div class="value mat-h1 mb-0" *ngIf="showFullValue">
+          {{ chartData.value }}
+        </div>
+        <div class="value mat-h1 mb-0" *ngIf="!showFullValue">
+          {{ chartData.unitLessValue }}
+        </div>
+        <div class="unit ms-1 mt-auto mb-1" *ngIf="!showFullValue">
+          {{ chartData.unit }}
+        </div>
+        <div class="trend ms-1 mt-auto opacity-50" *ngIf="chartData.trend">
+          <mat-icon>trending_{{ chartData.trend }}</mat-icon>
+        </div>
+      </div>
+      <div class="title text-center opacity-75">
+        {{ chartData.title }}
+        <mat-icon
+          *ngIf="chartData.info"
+          inline="true"
+          ngxTippy
+          [tippyProps]="{
+            content: chartData.info,
+            allowHTML: true,
+            placement: 'auto'
+          }"
+          tippyClassName="widget-tooltip"
+          class="info opacity-50 lh-1"
+        >
+          info_outline
+        </mat-icon>
+      </div>
+      <div class="subtitle text-center mat-h5 mb-0 opacity-50 lh-1">
+        {{ chartData.subtitle }}
+      </div>
+    </div>
+  </div>
+</ng-template>
