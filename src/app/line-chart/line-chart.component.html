@@ -38,21 +38,6 @@
   </mat-card-header>
 
   <mat-card-content class="d-flex flex-fill flex-column">
-    <div
-      class="d-flex flex-column justify-content-start"
-      *ngIf="chartData.stat"
-    >
-      <div class="mat-headline-2 statValue" *ngIf="showFullValue">
-        {{ chartData.stat.value }}
-      </div>
-      <div class="mat-headline-2 statValue" *ngIf="!showFullValue">
-        {{ chartData.stat.unitLessValue }}
-      </div>
-      <div class="mat-headline-6 statValue statUnit" *ngIf="!showFullValue">
-        {{ chartData.stat.unit }}
-      </div>
-    </div>
-
     <div class="chart-container" class="flex-fill" [ngStyle]="chartStyle">
       <canvas
         baseChart
@@ -60,7 +45,7 @@
         [datasets]="lineChartDatasets"
         [labels]="lineChartLabels"
         [options]="lineChartOptions"
-        [legend]="false"
+        [legend]="!chartData.hideLegend"
         type="line"
         [plugins]="lineChartPlugins"
       ></canvas>
@@ -70,7 +55,7 @@
       class="unavailableDataDiv flex-fill d-flex justify-content-center align-items-center"
       *ngIf="dataAbsent"
     >
-      {{ chartData.dataAbsentText || "Historical data unavailable" }}
+      {{ chartData.dataAbsentText || "Data Unavailable" }}
     </div>
   </mat-card-content>
 </mat-card>

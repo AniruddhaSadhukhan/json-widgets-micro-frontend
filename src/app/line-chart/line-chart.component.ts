@@ -7,27 +7,21 @@ import {
 } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { defaultsDeep, isString, split } from 'lodash-es';
+import { defaultsDeep, get, isObject, isString, split } from 'lodash-es';
 import { handleCallbackFunctions } from '../utils/chart';
 
 @Component({
-  selector: 'app-stat-graph-card',
-  templateUrl: './stat-graph-card.component.html',
-  styleUrls: ['./stat-graph-card.component.scss'],
+  selector: 'app-line-chart',
+  templateUrl: './line-chart.component.html',
+  styleUrls: ['./line-chart.component.scss'],
 })
-export class StatGraphCardComponent implements AfterViewInit {
+export class LineChartComponent implements AfterViewInit {
   @ViewChild('lineChartCanvas', { static: true }) canvas: ElementRef;
 
   chartStyle = {};
   dataAbsent = false;
   @Input() chartData = {
     labels: [],
-    stat: {
-      value: '',
-      showSeparateUnit: false,
-      unitLessValue: '',
-      unit: '',
-    },
     datasets: [],
     url: '',
     chartStyle: {},
@@ -36,10 +30,9 @@ export class StatGraphCardComponent implements AfterViewInit {
     title: '',
     subtitle: '',
     info: '',
+    hideLegend: true,
     dataAbsentText: '',
   };
-
-  showFullValue = true;
 
   public lineChartDatasets: ChartConfiguration<'line'>['data']['datasets'] = [
     {
@@ -58,20 +51,6 @@ export class StatGraphCardComponent implements AfterViewInit {
     setTimeout(() => {
       // Set Chart Style
       this.chartStyle = this.chartData.chartStyle || {};
-
-      // Decide stat unit
-      if (this.chartData.stat.value && this.chartData.stat.showSeparateUnit) {
-        const fullValue = this.chartData.stat.value;
-        try {
-          this.chartData.stat.unitLessValue = fullValue.match(/[.0-9]+/)[0];
-          this.chartData.stat.unit = fullValue
-            .replace(this.chartData.stat.unitLessValue, '')
-            .trim();
-          this.showFullValue = false;
-        } catch (e) {
-          console.log(e);
-        }
-      }
 
       // Check if data is present, else stop processing further
       if (this.chartData.hasOwnProperty('dataPresent')) {
@@ -95,18 +74,23 @@ export class StatGraphCardComponent implements AfterViewInit {
       [
         {
           data: [],
-          backgroundColor: '#305096-#30509615',
-          borderColor: '#19a9e1',
-          pointBackgroundColor: 'rgb(80,147,248)',
-          tension: 0.4,
+          backgroundColor: '#8626C366-#8626C305',
+          borderColor: '#8626C3',
+          pointBackgroundColor: '#8626C3',
+        },
+        {
+          data: [],
+          backgroundColor: '#FB883266-#FB883205',
+          borderColor: '#FB8832',
+          pointBackgroundColor: '#FB8832',
         },
       ];
 
     // Merge the default datasets with user input and delete excess datasets
     this.lineChartDatasets = defaultsDeep(
-      this.chartData.datasets,
+      this.chartData.datasets || [],
       defaultLineChartDatasets
-    );
+    ).filter((dataset) => dataset.data.length > 0);
 
     // Set labels if needed
     this.lineChartLabels = this.chartData.labels;
@@ -128,6 +112,7 @@ export class StatGraphCardComponent implements AfterViewInit {
       }
     });
   };
+
   setUpOptions = () => {
     // Default configuration for line chart
     let defaultLineChartOptions: ChartConfiguration<'line'>['options'] = {
@@ -138,6 +123,20 @@ export class StatGraphCardComponent implements AfterViewInit {
       plugins: {
         datalabels: {
           display: false,
+          align: 'end',
+          anchor: 'end',
+          clamp: true,
+          formatter: (value, ctx) => {
+            let label = value;
+            if (isObject(value)) {
+              label = get(
+                value,
+                ctx.dataset?.parsing?.['yAxisKey'],
+                get(value, 'label', JSON.stringify(value))
+              );
+            }
+            return `${label}`;
+          },
         },
         tooltip: {
           mode: 'index',
@@ -151,22 +150,18 @@ export class StatGraphCardComponent implements AfterViewInit {
           grid: {
             drawOnChartArea: false,
           },
-          ticks: {
-            color: '#e0e0e0b0',
-            callback: function (value) {
-              return this.getLabelForValue(Number(value)).charAt(0);
-            },
-          },
+          offset: true,
         },
         y: {
-          display: false,
+          grid: {
+            drawOnChartArea: false,
+          },
           beginAtZero: true,
+          grace: '10%',
         },
       },
       datasets: {
         line: {
-          pointRadius: 0,
-          pointHitRadius: 15,
           fill: true,
         },
       },

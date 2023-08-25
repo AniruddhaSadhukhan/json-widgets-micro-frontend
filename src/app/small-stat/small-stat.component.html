@@ -2,7 +2,7 @@
   <div *ngIf="!chartData.displayAsIndividualCard">
     <ng-container [ngTemplateOutlet]="smallStatTemplate"></ng-container>
   </div>
-  <mat-card *ngIf="chartData.displayAsIndividualCard">
+  <mat-card *ngIf="chartData.displayAsIndividualCard" class="shadow" >
     <mat-card-content>
       <ng-container [ngTemplateOutlet]="smallStatTemplate"></ng-container>
     </mat-card-content>
