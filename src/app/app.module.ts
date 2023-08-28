@@ -21,6 +21,8 @@ import { WidgetsContainerComponent } from './widgets-container/widgets-container
 const WidgetComponentMap = {
   'small-stat': SmallStatComponent,
   'line-chart': LineChartComponent,
+  'bar-chart': BarChartComponent,
+  'doughnut-chart': DoughnutChartComponent,
   'stat-graph-card': StatGraphCardComponent,
 };
 

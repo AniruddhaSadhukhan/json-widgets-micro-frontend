@@ -135,6 +135,413 @@ widgetContainer.jsonInput = {
     {
       classes: ["justify-content-center"],
       widgets: [
+        {
+          widget: "line-chart",
+          classes: ["col-md-6", "col-lg-3"],
+          title: "Trend in Sales",
+          subtitle: "in current year",
+          url: "www.google.com",
+          info: "<strong>Sale Trend</strong>  in current year",
+          datasets: [
+            {
+              data: [
+                {
+                  month: "Jan",
+                  value: 1.23,
+                },
+                {
+                  month: "Feb",
+                  value: 1.89,
+                },
+                {
+                  month: "Mar",
+                  value: 2.45,
+                },
+                {
+                  month: "Apr",
+                  value: 2.41,
+                },
+              ],
+              parsing: {
+                xAxisKey: "month",
+                yAxisKey: "value",
+              },
+              label: "Actual Sales (in M)",
+            },
+          ],
+          chartOptions: {
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "Month",
+                },
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: "Sales (in M)",
+                },
+                beginAtZero: false,
+              },
+            },
+            plugins: {
+              datalabels: {
+                display: true,
+              },
+              title: {
+                display: true,
+                text: "Sale Trend",
+              },
+              tooltip: {
+                callbacks: {
+                  label: {
+                    arguments: "tooltipItem",
+                    body: "return tooltipItem.dataset.label + ': ' + tooltipItem.formattedValue + ' k';",
+                  },
+                },
+              },
+            },
+          },
+          chartStyle: {
+            "height.px": 300,
+          },
+        },
+        {
+          widget: "line-chart",
+          classes: ["col-md-6", "col-lg-3"],
+          title: "Trend in Sales",
+          subtitle: "in current year",
+          url: "www.google.com",
+          info: "<strong>Sale Trend</strong>  in current year",
+          datasets: [
+            {
+              data: [30, 44, 60, 37],
+              label: "Actual Sales (in M)",
+            },
+            {
+              data: [50, 45, 80, 50],
+              label: "Expected Sales (in M)",
+            },
+          ],
+          labels: ["Jan", "Feb", "Mar", "Apr"],
+          chartOptions: {
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "Month",
+                },
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: "Sales (in M)",
+                },
+                beginAtZero: false,
+              },
+            },
+            plugins: {
+              datalabels: {
+                display: "auto",
+              },
+            },
+          },
+          chartStyle: {
+            "height.px": 300,
+          },
+        },
+        {
+          widget: "line-chart",
+          classes: ["col-md-6", "col-lg-3"],
+          title: "User Count",
+          subtitle: "in last year",
+          url: "www.google.com",
+          info: "<strong>Active User Count</strong>  in last year",
+          hideLegend: true,
+          datasets: [
+            {
+              data: "${{0.sampleResponse1.data.users.historicalData}}.sort((a, b) => { return new Date(a.time.year, a.time.month-1) - new Date(b.time.year, b.time.month-1)}).map((d) => d.value)",
+              label: "User Count (in M)",
+            },
+          ],
+          labels:
+            "${{0.sampleResponse1.data.users.historicalData}}.sort((a, b) => { return new Date(a.time.year, a.time.month-1) - new Date(b.time.year, b.time.month-1)}).map((d) => new Date(d.time.year, d.time.month-1))",
+          chartOptions: {
+            scales: {
+              x: {
+                type: "time",
+                time: {
+                  unit: "month",
+                  tooltipFormat: "MMMM y",
+                },
+              },
+            },
+          },
+        },
+        {
+          widget: "line-chart",
+          classes: ["col-md-6", "col-lg-3"],
+          title: "Trend in Sales",
+          subtitle: "in current year",
+          url: "www.google.com",
+          info: "<strong>Sale Trend</strong>  in current year",
+          dataPresent: "#{{sampleResponse2.data}}.length",
+          datasets: [
+            {
+              data: "#{{sampleResponse2.data}}.map((d) => d.actual)",
+              label: "Actual Sales (in M)",
+            },
+            {
+              data: "#{{sampleResponse2.data}}.map((d) => d.expected)",
+              label: "Expected Sales (in M)",
+            },
+          ],
+          labels: "#{{sampleResponse2.data}}.map((d) => d.month)",
+          chartOptions: {
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "Month",
+                },
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: "Sales (in M)",
+                },
+                beginAtZero: false,
+              },
+            },
+            plugins: {
+              datalabels: {
+                display: "auto",
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+          chartStyle: {
+            "height.px": 300,
+          },
+        },
+      ],
+    },
+    {
+      classes: ["justify-content-center"],
+      widgets: [
+        {
+          widget: "bar-chart",
+          classes: ["col-md-6", "col-lg-3"],
+          title: "Trend in Sales",
+          subtitle: "in current year",
+          hideLegend: true,
+          url: "www.google.com",
+          info: "<strong>Sale Trend</strong>  in current year",
+          datasets: [
+            {
+              data: [
+                {
+                  month: "Jan",
+                  value: 1.23,
+                },
+                {
+                  month: "Feb",
+                  value: 1.89,
+                },
+                {
+                  month: "Mar",
+                  value: 2.45,
+                },
+                {
+                  month: "Apr",
+                  value: 2.41,
+                },
+              ],
+              parsing: {
+                xAxisKey: "month",
+                yAxisKey: "value",
+              },
+              label: "Actual Sales (in M)",
+            },
+          ],
+          chartOptions: {
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "Month",
+                },
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: "Sales (in M)",
+                },
+                beginAtZero: false,
+              },
+            },
+            plugins: {
+              datalabels: {
+                display: true,
+              },
+              title: {
+                display: true,
+                text: "Sale Trend",
+              },
+              tooltip: {
+                callbacks: {
+                  label: {
+                    arguments: "tooltipItem",
+                    body: "return tooltipItem.dataset.label + ': ' + tooltipItem.formattedValue + ' k';",
+                  },
+                },
+              },
+            },
+          },
+          chartStyle: {
+            "height.px": 300,
+          },
+        },
+        {
+          widget: "bar-chart",
+          classes: ["col-md-6", "col-lg-3"],
+          title: "Trend in Sales",
+          subtitle: "in current year",
+          url: "www.google.com",
+          info: "<strong>Sale Trend</strong>  in current year",
+          datasets: [
+            {
+              data: [30, 44, 60, 37],
+              label: "Actual Sales (in M)",
+            },
+            {
+              data: [50, 45, 80, 50],
+              label: "Expected Sales (in M)",
+            },
+          ],
+          labels: ["Jan", "Feb", "Mar", "Apr"],
+          chartOptions: {
+            indexAxis: "y",
+            scales: {
+              y: {
+                title: {
+                  display: true,
+                  text: "Month",
+                },
+                stacked: true,
+              },
+              x: {
+                title: {
+                  display: true,
+                  text: "Sales (in M)",
+                },
+                grace: "10%",
+                offset: false,
+                ticks: {
+                  callback: {
+                    arguments: "value, index, ticks",
+                    body: "return value + ' M';",
+                  },
+                },
+              },
+            },
+            plugins: {
+              datalabels: {
+                display: "auto",
+              },
+              tooltip: {
+                axis: "y",
+              },
+            },
+          },
+          chartStyle: {
+            "height.px": 300,
+          },
+        },
+        {
+          widget: "bar-chart",
+          classes: ["col-md-6", "col-lg-3"],
+          title: "User Count",
+          subtitle: "in last year",
+          url: "www.google.com",
+          info: "<strong>Active User Count</strong>  in last year",
+          hideLegend: true,
+          datasets: [
+            {
+              data: "${{0.sampleResponse1.data.users.historicalData}}.sort((a, b) => { return new Date(a.time.year, a.time.month-1) - new Date(b.time.year, b.time.month-1)}).map((d) => d.value)",
+              label: "User Count (in M)",
+            },
+          ],
+          labels:
+            "${{0.sampleResponse1.data.users.historicalData}}.sort((a, b) => { return new Date(a.time.year, a.time.month-1) - new Date(b.time.year, b.time.month-1)}).map((d) => new Date(d.time.year, d.time.month-1))",
+          chartOptions: {
+            scales: {
+              x: {
+                type: "time",
+                time: {
+                  unit: "month",
+                  tooltipFormat: "MMMM y",
+                },
+              },
+            },
+          },
+        },
+        {
+          widget: "bar-chart",
+          classes: ["col-md-6", "col-lg-3"],
+          title: "Trend in Sales",
+          subtitle: "in current year",
+          url: "www.google.com",
+          info: "<strong>Sale Trend</strong>  in current year",
+          dataPresent: "#{{sampleResponse2.data}}.length",
+          datasets: [
+            {
+              data: "#{{sampleResponse2.data}}.map((d) => d.actual)",
+              label: "Actual Sales (in M)",
+            },
+            {
+              data: "#{{sampleResponse2.data}}.map((d) => d.expected)",
+              label: "Expected Sales (in M)",
+            },
+          ],
+          labels: "#{{sampleResponse2.data}}.map((d) => d.month)",
+          chartOptions: {
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "Month",
+                },
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: "Sales (in M)",
+                },
+                beginAtZero: true,
+              },
+            },
+            plugins: {
+              datalabels: {
+                display: "auto",
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+          chartStyle: {
+            "height.px": 300,
+          },
+        },
+      ],
+    },
+    {
+      classes: ["justify-content-center"],
+      widgets: [
         // {
         //   widget: "stat-graph-card",
         //   classes: ["col-md-6", "col-lg-3"],
@@ -347,203 +754,7 @@ widgetContainer.jsonInput = {
         },
       ],
     },
-    {
-      classes: ["justify-content-center"],
-      widgets: [
-        {
-          widget: "line-chart",
-          classes: ["col-md-6", "col-lg-3"],
-          title: "Trend in Sales",
-          subtitle: "in current year",
-          url: "www.google.com",
-          info: "<strong>Sale Trend</strong>  in current year",
-          datasets: [
-            {
-              data: [
-                {
-                  month: "Jan",
-                  value: 1.23,
-                },
-                {
-                  month: "Feb",
-                  value: 1.89,
-                },
-                {
-                  month: "Mar",
-                  value: 2.45,
-                },
-                {
-                  month: "Apr",
-                  value: 2.41,
-                },
-              ],
-              parsing: {
-                xAxisKey: "month",
-                yAxisKey: "value",
-              },
-              label: "Actual Sales (in M)",
-            },
-          ],
-          chartOptions: {
-            scales: {
-              x: {
-                title: {
-                  display: true,
-                  text: "Month",
-                },
-              },
-              y: {
-                title: {
-                  display: true,
-                  text: "Sales (in M)",
-                },
-                beginAtZero: false,
-              },
-            },
-            plugins: {
-              datalabels: {
-                display: true,
-              },
-              title: {
-                display: true,
-                text: "Sale Trend",
-              },
-              tooltip: {
-                callbacks: {
-                  label: {
-                    arguments: "tooltipItem",
-                    body: "return tooltipItem.dataset.label + ': ' + tooltipItem.formattedValue + ' k';",
-                  },
-                },
-              },
-            },
-          },
-          chartStyle: {
-            "height.px": 300,
-          },
-        },
-        {
-          widget: "line-chart",
-          classes: ["col-md-6", "col-lg-3"],
-          title: "Trend in Sales",
-          subtitle: "in current year",
-          url: "www.google.com",
-          info: "<strong>Sale Trend</strong>  in current year",
-          datasets: [
-            {
-              data: [30, 44, 60, 37],
-              label: "Actual Sales (in M)",
-            },
-            {
-              data: [50, 45, 80, 50],
-              label: "Expected Sales (in M)",
-            },
-          ],
-          labels: ["Jan", "Feb", "Mar", "Apr"],
-          chartOptions: {
-            scales: {
-              x: {
-                title: {
-                  display: true,
-                  text: "Month",
-                },
-              },
-              y: {
-                title: {
-                  display: true,
-                  text: "Sales (in M)",
-                },
-                beginAtZero: false,
-              },
-            },
-            plugins: {
-              datalabels: {
-                display: "auto",
-              },
-            },
-          },
-          chartStyle: {
-            "height.px": 300,
-          },
-        },
-        {
-          widget: "line-chart",
-          classes: ["col-md-6", "col-lg-3"],
-          title: "User Count",
-          subtitle: "in last year",
-          url: "www.google.com",
-          info: "<strong>Active User Count</strong>  in last year",
-          hideLegend: true,
-          datasets: [
-            {
-              data: "${{0.sampleResponse1.data.users.historicalData}}.sort((a, b) => { return new Date(a.time.year, a.time.month-1) - new Date(b.time.year, b.time.month-1)}).map((d) => d.value)",
-              label: "User Count (in M)",
-            },
-          ],
-          labels:
-            "${{0.sampleResponse1.data.users.historicalData}}.sort((a, b) => { return new Date(a.time.year, a.time.month-1) - new Date(b.time.year, b.time.month-1)}).map((d) => new Date(d.time.year, d.time.month-1))",
-          chartOptions: {
-            scales: {
-              x: {
-                type: "time",
-                time: {
-                  unit: "month",
-                  tooltipFormat: "MMMM y",
-                },
-              },
-            },
-          },
-        },
-        {
-          widget: "line-chart",
-          classes: ["col-md-6", "col-lg-3"],
-          title: "Trend in Sales",
-          subtitle: "in current year",
-          url: "www.google.com",
-          info: "<strong>Sale Trend</strong>  in current year",
-          dataPresent: "#{{sampleResponse2.data}}.length",
-          datasets: [
-            {
-              data: "#{{sampleResponse2.data}}.map((d) => d.actual)",
-              label: "Actual Sales (in M)",
-            },
-            {
-              data: "#{{sampleResponse2.data}}.map((d) => d.expected)",
-              label: "Expected Sales (in M)",
-            },
-          ],
-          labels: "#{{sampleResponse2.data}}.map((d) => d.month)",
-          chartOptions: {
-            scales: {
-              x: {
-                title: {
-                  display: true,
-                  text: "Month",
-                },
-              },
-              y: {
-                title: {
-                  display: true,
-                  text: "Sales (in M)",
-                },
-                beginAtZero: false,
-              },
-            },
-            plugins: {
-              datalabels: {
-                display: "auto",
-              },
-              legend: {
-                position: "bottom",
-              },
-            },
-          },
-          chartStyle: {
-            "height.px": 300,
-          },
-        },
-      ],
-    },
+    
   ],
 };
 
