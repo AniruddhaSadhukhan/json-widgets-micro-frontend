@@ -22,7 +22,7 @@ const WidgetComponentMap = {
   'small-stat': SmallStatComponent,
   'line-chart': LineChartComponent,
   'bar-chart': BarChartComponent,
-  'doughnut-chart': DoughnutChartComponent,
+  'doughnut-pie-chart': DoughnutChartComponent,
   'stat-graph-card': StatGraphCardComponent,
 };
 

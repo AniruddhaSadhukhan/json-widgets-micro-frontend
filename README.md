@@ -211,7 +211,10 @@ For Example:
 
 ### Supported Widgets
 
-| Type            | Widget            | Documentation                                   |
-| --------------- | ----------------- | ----------------------------------------------- |
-| Small Stat      | `small-stat`      | [Small Stat Docs](docs/small-stat.md)           |
-| Stat Graph Card | `stat-graph-card` | [Stat Graph Card Docs](docs/stat-graph-card.md) |
+| Type               | Widget               | Documentation                                         |
+| ------------------ | -------------------- | ----------------------------------------------------- |
+| Small Stat         | `small-stat`         | [Small Stat Docs](docs/small-stat.md)                 |
+| Stat Graph Card    | `stat-graph-card`    | [Stat Graph Card Docs](docs/stat-graph-card.md)       |
+| Line Chart         | `line-chart`         | [Line Chart Docs](docs/line-chart.md)                 |
+| Bar Chart          | `bar-chart`          | [Bar Chart Docs](docs/bar-chart.md)                   |
+| Doughnut/Pie Chart | `doughnut-pie-chart` | [Doughnut/Pie Chart Docs](docs/doughnut-pie-chart.md) |
