@@ -1,1 +1,60 @@
-<p>doughnut-chart works!</p>
+<mat-card
+  appearance="outlined"
+  class="d-flex mat-typography fullHeight widgetCard flex-column h-100 w-100 shadow"
+>
+  <mat-card-header *ngIf="chartData.title" class="d-flex">
+    <div class="mat-headline-6 widget-title" *ngIf="chartData.title">
+      <strong>{{ chartData.title }}</strong>
+
+      <div class="mat-body-1 subtitle" *ngIf="chartData.subtitle">
+        {{ chartData.subtitle }}
+      </div>
+    </div>
+
+    <div class="d-flex flex-fill"></div>
+
+    <mat-icon
+      *ngIf="chartData.url"
+      matTooltip="Open details in new tab"
+      class="widget-url"
+      (click)="openURL()"
+    >
+      open_in_new
+    </mat-icon>
+
+    <mat-icon
+      *ngIf="chartData.info"
+      ngxTippy
+      [tippyProps]="{
+        content: chartData.info,
+        allowHTML: true,
+        placement: 'auto'
+      }"
+      tippyClassName="widget-tooltip"
+      class="info"
+    >
+      info_outline
+    </mat-icon>
+  </mat-card-header>
+
+  <mat-card-content class="d-flex flex-fill flex-column">
+    <div class="chart-container" class="flex-fill" [ngStyle]="chartStyle">
+      <canvas
+        baseChart
+        [datasets]="doughnutChartDatasets"
+        [labels]="doughnutChartLabels"
+        [options]="doughnutChartOptions"
+        [legend]="!chartData.hideLegend"
+        type="doughnut"
+        [plugins]="doughnutChartPlugins"
+      ></canvas>
+    </div>
+
+    <div
+      class="unavailableDataDiv flex-fill d-flex justify-content-center align-items-center"
+      *ngIf="dataAbsent"
+    >
+      {{ chartData.dataAbsentText || "Data Unavailable" }}
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -542,6 +542,175 @@ widgetContainer.jsonInput = {
     {
       classes: ["justify-content-center"],
       widgets: [
+        {
+          widget: "doughnut-pie-chart",
+          classes: ["col-md-6", "col-lg-3"],
+          title: "Success Rate",
+          subtitle: "For year 2023",
+          url: "www.google.com",
+          info: "<strong>Success Rate</strong>  in current year",
+          datasets: [
+            {
+              data: [60, 30, 10],
+            },
+          ],
+          labels: ["Success", "Failed", "Pending"],
+          chartOptions: {
+            plugins: {
+              title: {
+                display: true,
+                text: "Test Results",
+              },
+            },
+          },
+        },
+        {
+          widget: "doughnut-pie-chart",
+          classes: ["col-md-6", "col-lg-3"],
+          title: "Success Rate",
+          subtitle: "For year 2023",
+          url: "www.google.com",
+          info: "<strong>Success Rate</strong>  in current year",
+          datasets: [
+            {
+              data: [60, 30, 10],
+            },
+          ],
+          labels: ["Success", "Failed", "Pending"],
+          chartOptions: {
+            cutout: 0,
+            plugins: {
+              title: {
+                display: true,
+                text: ["Test Results", "(in %)"],
+              },
+              datalabels: {
+                display: "auto",
+              },
+              legend: {
+                position: "bottom",
+                labels: {
+                  usePointStyle: true,
+                },
+              },
+              tooltip: {
+                callbacks: {
+                  label: {
+                    arguments: "tooltipItem",
+                    body: "return tooltipItem.label + ': ' + tooltipItem.formattedValue + ' %';",
+                  },
+                },
+              },
+            },
+          },
+        },
+        {
+          widget: "doughnut-pie-chart",
+          classes: ["col-md-6", "col-lg-3"],
+          title: "Success Rate",
+          subtitle: "For year 2023",
+          url: "www.google.com",
+          info: "<strong>Success Rate</strong>  in current year",
+          datasets: [
+            {
+              data: [60, 40],
+              backgroundColor: ["green", "red"],
+            },
+          ],
+          labels: ["Success", "Failed"],
+          chartOptions: {
+            cutout: "80%",
+            borderRadius: 50,
+            rotation: -135,
+            circumference: 270,
+            layout: {
+              padding: {
+                left: 50,
+                right: 50,
+                top: 25,
+                bottom: 25,
+              },
+            },
+            plugins: {
+              title: {
+                display: true,
+                text: "Test Results",
+              },
+              legend: {
+                position: "bottom",
+                labels: {
+                  usePointStyle: true,
+                },
+              },
+            },
+          },
+        },
+        {
+          widget: "doughnut-pie-chart",
+          classes: ["col-md-6", "col-lg-3"],
+          title: "Success Rate",
+          subtitle: "For year 2023",
+          url: "www.google.com",
+          info: "<strong>Success Rate</strong>  in current year",
+          datasets: [
+            {
+              data: [60, 30, 10, 50, 25],
+              datalabels: {
+                anchor: "end",
+              },
+            },
+            {
+              data: [20, 80, 60, 40, 75],
+              datalabels: {
+                anchor: "center",
+                backgroundColor: null,
+                borderWidth: 0,
+              },
+            },
+            {
+              data: [60, 30, 10, 50, 25],
+              datalabels: {
+                anchor: "start",
+              },
+            },
+          ],
+          labels: ["A", "B", "C", "D", "E"],
+          chartOptions: {
+            backgroundColor: [
+              "#FF3784",
+              "#36A2EB",
+              "#4BC0C0",
+              "#F77825",
+              "#9966FF",
+            ],
+            layout: {
+              padding: 10,
+            },
+            borderColor: "darkbrown",
+            plugins: {
+              datalabels: {
+                display: true,
+                backgroundColor: {
+                  arguments: "context",
+                  body: "console.log(context.chart.config.options.backgroundColor);return context.chart.config.options.backgroundColor;",
+                },
+                borderColor: "darkbrown",
+                borderRadius: 25,
+                borderWidth: 2,
+                color: "white",
+                font: {
+                  weight: "bold",
+                },
+                padding: 6,
+              },
+            },
+          },
+        },
+      ],
+    },
+    {
+      classes: ["justify-content-center"],
+      widgets: [
         // {
         //   widget: "stat-graph-card",
         //   classes: ["col-md-6", "col-lg-3"],
@@ -754,7 +923,6 @@ widgetContainer.jsonInput = {
         },
       ],
     },
-    
   ],
 };
 

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { defaultsDeep, get, isObject } from 'lodash-es';
@@ -9,7 +9,7 @@ import { handleCallbackFunctions } from '../utils/chart';
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.scss'],
 })
-export class BarChartComponent {
+export class BarChartComponent implements AfterViewInit {
   chartStyle = {};
   dataAbsent = false;
   @Input() chartData = {

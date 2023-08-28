@@ -1,6 +1,6 @@
-## Bar Chart Widget
+## Doughnut/Pie Chart Widget
 
-![](assets/barChart1.png)
+![](assets/doughnutChart1.png)
 
 | Option Name    | Description                                                                                                                                | Structure | Default                     |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | --------- | --------------------------- |
@@ -10,7 +10,7 @@
 | url            | If given, an icon will be shown, which when clicked will open the given URL in a new tab                                                   | String    | null                        |
 | datasets       | [See ChartJS Docs](https://www.chartjs.org/docs/3.9.1/general/data-structures.html).                                                       | Object[]  | []                          |
 | labels         | [See ChartJS Docs](https://www.chartjs.org/docs/3.9.1/general/data-structures.html).                                                       | String[]  | []                          |
-| chartOptions   | Provide additional[Chart.js Options](https://www.chartjs.org/docs/3.9.1/charts/line.html#dataset-properties) to bar-chart                  | Object    | [See Below](#chart-options) |
+| chartOptions   | Provide additional[Chart.js Options](https://www.chartjs.org/docs/3.9.1/charts/line.html#dataset-properties) to doughnut-chart             | Object    | [See Below](#chart-options) |
 | hideLegend     | Will hide the legend if True                                                                                                               | Bool      | false                       |
 | dataPresent    | Will hide the chart if False                                                                                                               | Bool      | true                        |
 | dataAbsentText | Text to show when dataPresent is False                                                                                                     | String    | `Data Unavailable`          |
@@ -31,63 +31,26 @@
 ### Chart Options
 
 ```ts
-    {
-      maintainAspectRatio: false,
-      animation: {
-        duration: 1500,
-      },
-      plugins: {
-        datalabels: {
-          display: false,
-          align: 'end',
-          anchor: 'end',
-          clamp: true,
-          formatter: (value, ctx) => {
-            let label = value;
-            if (isObject(value)) {
-              label = get(
-                value,
-                ctx.dataset?.parsing?.['yAxisKey'],
-                get(value, 'label', JSON.stringify(value))
-              );
-            }
-            return `${label}`;
-          },
+      {
+        maintainAspectRatio: false,
+        animation: {
+          duration: 1500,
         },
-        tooltip: {
-          mode: 'index',
-          intersect: false,
-          position: 'average',
-          titleAlign: 'center',
-        },
-      },
-      scales: {
-        x: {
-          grid: {
-            drawOnChartArea: false,
-          },
-          offset: true,
-        },
-        y: {
-          grid: {
-            drawOnChartArea: false,
-          },
-          beginAtZero: true,
-          grace: '10%',
-        },
-      },
-      datasets: {
-        bar: {
-          maxBarThickness: 40,
-          borderRadius: {
-            bottomLeft: 8,
-            bottomRight: 8,
-            topLeft: 8,
-            topRight: 8,
-          },
-        },
-      },
-    }
+        cutout: '50%',
+        plugins: {
+          datalabels: {
+            display: false,
+            clamp: true,
+            formatter: (value, ctx) => {
+              let label = value;
+              if (isObject(value)) {
+                label = get(value, 'label', JSON.stringify(value));
+              }
+              return `${label}`;
+            },
+          }
+        }
+      }
 ```
 
 Any options given through `chartOptions` will be added in case not configured or will override in case already configured in default options.
@@ -112,89 +75,38 @@ See examples below.
 
 ### Examples:
 
-#### Example 1
+#### Example 1 : Doughnut Chart
 
 ##### JSON Input:
 
 ```js
         {
-          widget: "bar-chart",
+          widget: "doughnut-pie-chart",
           classes: ["col-md-6", "col-lg-3"],
-          title: "Trend in Sales",
-          subtitle: "in current year",
-          hideLegend: true,
+          title: "Success Rate",
+          subtitle: "For year 2023",
           url: "www.google.com",
-          info: "<strong>Sale Trend</strong>  in current year",
+          info: "<strong>Success Rate</strong>  in current year",
           datasets: [
             {
-              data: [
-                {
-                  month: "Jan",
-                  value: 1.23,
-                },
-                {
-                  month: "Feb",
-                  value: 1.89,
-                },
-                {
-                  month: "Mar",
-                  value: 2.45,
-                },
-                {
-                  month: "Apr",
-                  value: 2.41,
-                },
-              ],
-              parsing: {
-                xAxisKey: "month",
-                yAxisKey: "value",
-              },
-              label: "Actual Sales (in M)",
+              data: [60, 30, 10],
             },
           ],
+          labels: ["Success", "Failed", "Pending"],
           chartOptions: {
-            scales: {
-              x: {
-                title: {
-                  display: true,
-                  text: "Month",
-                },
-              },
-              y: {
-                title: {
-                  display: true,
-                  text: "Sales (in M)",
-                },
-                beginAtZero: false,
-              },
-            },
             plugins: {
-              datalabels: {
-                display: true,
-              },
               title: {
                 display: true,
-                text: "Sale Trend",
-              },
-              tooltip: {
-                callbacks: {
-                  label: {
-                    arguments: "tooltipItem",
-                    body: "return tooltipItem.dataset.label + ': ' + tooltipItem.formattedValue + ' k';",
-                  },
-                },
+                text: "Test Results",
               },
             },
-          },
-          chartStyle: {
-            "height.px": 300,
           },
         }
 ```
 
 ##### Widget Output
 
-![](assets/barChart2.png)
+![](assets/doughnutChart2.png)
 
 #### Example 2
 
@@ -202,66 +114,50 @@ See examples below.
 
 ```js
         {
-          widget: "bar-chart",
+          widget: "doughnut-pie-chart",
           classes: ["col-md-6", "col-lg-3"],
-          title: "Trend in Sales",
-          subtitle: "in current year",
+          title: "Success Rate",
+          subtitle: "For year 2023",
           url: "www.google.com",
-          info: "<strong>Sale Trend</strong>  in current year",
+          info: "<strong>Success Rate</strong>  in current year",
           datasets: [
             {
-              data: [30, 44, 60, 37],
-              label: "Actual Sales (in M)",
-            },
-            {
-              data: [50, 45, 80, 50],
-              label: "Expected Sales (in M)",
+              data: [60, 30, 10],
             },
           ],
-          labels: ["Jan", "Feb", "Mar", "Apr"],
+          labels: ["Success", "Failed", "Pending"],
           chartOptions: {
-            indexAxis: "y",
-            scales: {
-              y: {
-                title: {
-                  display: true,
-                  text: "Month",
-                },
-                stacked: true,
+            cutout: 0,
+            plugins: {
+              title: {
+                display: true,
+                text: ["Test Results", "(in %)"],
               },
-              x: {
-                title: {
-                  display: true,
-                  text: "Sales (in M)",
+              datalabels: {
+                display: "auto",
+              },
+              legend: {
+                position: "bottom",
+                labels: {
+                  usePointStyle: true,
                 },
-                grace: "10%",
-                offset: false,
-                ticks: {
-                  callback: {
-                    arguments: "value, index, ticks",
-                    body: "return value + ' M';",
+              },
+              tooltip: {
+                callbacks: {
+                  label: {
+                    arguments: "tooltipItem",
+                    body: "return tooltipItem.label + ': ' + tooltipItem.formattedValue + ' %';",
                   },
                 },
               },
             },
-            plugins: {
-              datalabels: {
-                display: "auto",
-              },
-              tooltip: {
-                axis: "y",
-              },
-            },
-          },
-          chartStyle: {
-            "height.px": 300,
           },
         }
 ```
 
 ##### Widget Output
 
-![](assets/barChart3.png)
+![](assets/doughnutChart3.png)
 
 ---
 
