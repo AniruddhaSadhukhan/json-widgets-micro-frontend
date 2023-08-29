@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "lint": "ng lint",
-    "start": "ng serve -o",
+    "deploy": "surge --project ./dist/json-widgets-micro-frontend --domain ani-json-widget-micro-frontend.surge.sh",
+    "deployDemo": "surge --project ./demo --domain ani-json-widget-micro-frontend-demo.surge.sh",
     "build": "ng build",
     "serve": "bash run-mf.sh",
     "test": "ng test"

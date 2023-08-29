@@ -5,14 +5,16 @@ This is a Micro-Frontend written in Angular that can render a collection of conf
 Being a Micro-Frontend, this can be used in any web-application be it Angular, React, Vue or even simple HTML + JS page.
 An example of its use in a simple HTML page is given in the [demo](./demo/) folder.
 
+### Demo Site : https://ani-json-widget-micro-frontend-demo.surge.sh
+
 ### Usage
 
 To use this Micro-Frontend, you need to first import its `main.js` and `style.css` files in your `index.html` file of the application where you want to render the widget collection. In case of non-Angular applications, you need to import the `polyfills.js` file as well.
 
 ```html
-<link rel="stylesheet" href="http://localhost:4251/json-widgets-micro-frontend/styles.css" />
-<script src="http://localhost:4251/json-widgets-micro-frontend/polyfills.js"></script>
-<script src="http://localhost:4251/json-widgets-micro-frontend/main.js"></script>
+<link rel="stylesheet" href="https://ani-json-widget-micro-frontend.surge.sh/styles.css" />
+<script src="https://ani-json-widget-micro-frontend.surge.sh/polyfills.js"></script>
+<script src="https://ani-json-widget-micro-frontend.surge.sh/main.js"></script>
 ```
 
 Then use the HTML tag `json-widgets` with appropriate inputs and outputs to use this.
