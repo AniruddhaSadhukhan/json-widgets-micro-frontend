@@ -5,7 +5,15 @@ This is a Micro-Frontend written in Angular that can render a collection of conf
 Being a Micro-Frontend, this can be used in any web-application be it Angular, React, Vue or even simple HTML + JS page.
 An example of its use in a simple HTML page is given in the [demo](./demo/) folder.
 
+---
+
 ### Demo Site : https://ani-json-widget-micro-frontend-demo.surge.sh
+
+### Example Screenshot
+
+![](docs/assets/example.png)
+
+---
 
 ### Usage
 
@@ -223,7 +231,3 @@ For Example:
 | Progress Chart     | `progress-chart`     | [Progress Chart Docs](docs/progress-chart.md)         |
 
 ---
-
-### Example Screenshot
-
-![](docs/assets/example.png)
