@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { DoughnutChartComponent } from './doughnut-chart/doughnut-chart.component';
 import { LineChartComponent } from './line-chart/line-chart.component';
+import { ProgressChartComponent } from './progress-chart/progress-chart.component';
 import { SmallStatComponent } from './small-stat/small-stat.component';
 import { StatGraphCardComponent } from './stat-graph-card/stat-graph-card.component';
 import { WidgetsContainerComponent } from './widgets-container/widgets-container.component';
@@ -22,6 +23,7 @@ const WidgetComponentMap = {
   'small-stat': SmallStatComponent,
   'line-chart': LineChartComponent,
   'bar-chart': BarChartComponent,
+  'progress-chart': ProgressChartComponent,
   'doughnut-pie-chart': DoughnutChartComponent,
   'stat-graph-card': StatGraphCardComponent,
 };
@@ -42,6 +44,7 @@ const MaterialModules = [
     LineChartComponent,
     BarChartComponent,
     DoughnutChartComponent,
+    ProgressChartComponent,
   ],
   imports: [
     BrowserModule,

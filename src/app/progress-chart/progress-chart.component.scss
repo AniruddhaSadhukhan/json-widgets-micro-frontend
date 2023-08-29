@@ -1,0 +1,41 @@
+.progress-outer {
+  width: 96%;
+  margin: 10px 2%;
+  padding: 3px;
+  background-color: #f4f4f4;
+  border: 1px solid #dcdcdc;
+  color: #fff;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.progress-inner {
+  min-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0px;
+  border-radius: 20px;
+  animation: progress 2s;
+}
+
+.value{
+    color: rgba(0,0,0,0.54);
+    margin-bottom: -7px;
+}
+
+@keyframes progress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.progress-container > div {
+    padding: 10px;
+}
+
+.clickable{
+    cursor: pointer;
+}

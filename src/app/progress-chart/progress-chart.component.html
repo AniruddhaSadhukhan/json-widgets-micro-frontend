@@ -1,0 +1,28 @@
+<div class="row progress-container" *ngIf="!loading">
+  <div *ngFor="let item of chartData.datasets" [ngClass]="item.classes">
+    <div class="d-flex justify-content-between">
+      <span
+        class="mat-h4 fw-bold mb-0"
+        [ngClass]="{ clickable: chartData.clickable }"
+        (click)="itemClicked(item)"
+      >
+        {{ item.title }}
+      </span>
+      <span class="value mat-small" *ngIf="item.value">
+        {{ item.value }} <span *ngIf="item.max">/{{ item.max }}</span>
+      </span>
+    </div>
+    <div
+      class="progress-outer"
+      [ngClass]="{ clickable: chartData.clickable }"
+      (click)="itemClicked(item)"
+    >
+      <div [style.width]="whichWidth(item.progress)">
+        <div class="progress-inner" [style.background-color]="color">
+          {{ item.progress
+          }}<ng-container *ngIf="!disablePercentage">% </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

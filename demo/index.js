@@ -692,7 +692,7 @@ widgetContainer.jsonInput = {
                 display: true,
                 backgroundColor: {
                   arguments: "context",
-                  body: "console.log(context.chart.config.options.backgroundColor);return context.chart.config.options.backgroundColor;",
+                  body: "return context.chart.config.options.backgroundColor;",
                 },
                 borderColor: "darkbrown",
                 borderRadius: 25,
@@ -920,6 +920,46 @@ widgetContainer.jsonInput = {
             "() => {\n  let historicalData = ${{0.sampleResponse1.data.users.historicalData}};\n  if (historicalData?.length > 2) {\n    historicalData = historicalData\n      .sort((a, b) => {\n        return (\n          new Date(a.time.year, a.time.month - 1) -\n          new Date(b.time.year, b.time.month - 1)\n        );\n      })\n      .slice(-2);\n    let oldValue = historicalData[0].value;\n    let newValue = historicalData[1].value;\n    return newValue > oldValue ? 'up' : newValue < oldValue ? 'down' : 'flat';\n  } else {\n    return '';\n  }\n};\n",
           info: "abc",
           icon: "groups",
+        },
+      ],
+    },
+    {
+      classes: ["justify-content-center"],
+      widgets: [
+        {
+          widget: "progress-chart",
+          classes: ["col-12"],
+          clickable: true,
+          datasets: [
+            {
+              title: "Category A",
+              classes: ["col-md-6"],
+              max: 50,
+              value: 30,
+              customId: 1,
+            },
+            {
+              title: "Category B",
+              classes: ["col-md-6"],
+              max: 50,
+              value: 40,
+              customId: 1,
+            },
+            {
+              title: "Category C",
+              classes: ["col-md-6"],
+              max: 50,
+              value: 10,
+              customId: 1,
+            },
+            {
+              title: "Category D",
+              classes: ["col-md-6"],
+              max: 50,
+              value: 50,
+              customId: 1,
+            },
+          ],
         },
       ],
     },

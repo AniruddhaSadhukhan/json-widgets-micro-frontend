@@ -218,3 +218,10 @@ For Example:
 | Line Chart         | `line-chart`         | [Line Chart Docs](docs/line-chart.md)                 |
 | Bar Chart          | `bar-chart`          | [Bar Chart Docs](docs/bar-chart.md)                   |
 | Doughnut/Pie Chart | `doughnut-pie-chart` | [Doughnut/Pie Chart Docs](docs/doughnut-pie-chart.md) |
+| Progress Chart     | `progress-chart`     | [Progress Chart Docs](docs/progress-chart.md)         |
+
+---
+
+### Example Screenshot
+
+![](docs/assets/example.png)
